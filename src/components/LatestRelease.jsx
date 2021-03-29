@@ -5,7 +5,7 @@ import fantasyList from "../data/fantasy.json";
 import scifiList from "../data/scifi.json";
 import horrorList from "../data/horror.json";
 //import { Carousel } from 'react-bootstrap'
-import { Card, Container, Row,  } from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 import CommentArea from "./CommentArea";
 const latestList = romanceList
   .slice(0, 3)
@@ -26,13 +26,13 @@ class LatestRelease extends React.Component {
     return (
       <Container fluid>
         <h1>Latest Release!</h1>
-        {this.state.selectedBook 
-          ? <CommentArea bookDetails={this.state.selectedBook} />
-          : <p>Select a Book</p>}
-        <Row className="overflow-auto" id="cardRow"> 
 
+        <Row className="overflow-auto" id="cardRow"> 
+          <Col xs={8}>
+            <Row>
           {latestList.map((book) => (
-              <Card
+              <Col xs={3}>
+                <Card
               className="m-3"
               key={book.category + book.asin}
               style={{ width: "10rem" }}
@@ -61,8 +61,17 @@ class LatestRelease extends React.Component {
 
               </Card.Body>
             </Card>
-            
+</Col>
+              
+                          
           ))}
+          </Row>
+          </Col>
+          <Col xs={4}>
+        {this.state.selectedBook 
+          ? <CommentArea bookDetails={this.state.selectedBook} />
+          : <p>Select a Book</p>}
+          </Col>
         </Row>
       </Container>
     );
